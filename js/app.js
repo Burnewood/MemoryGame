@@ -1,6 +1,17 @@
 /*
- * Create a list that holds all of your cards
+ * Set variables for functions & create array to hold card symbols
  */
+let symbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar','robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar'],
+    cardTotal = symbols.length / 2,
+    matches = 0,
+    moves = 0,
+    sixDie = 8,
+    fiveDie = 10,
+    fourDie = 15,
+    threeDie = 20,
+    twoDie = 25,
+    oneDie = 30,
+    sec = 0;
 
 
 /*
@@ -25,7 +36,10 @@ function shuffle(array) {
     return array;
 }
 
-
+function time(val) { return val > 9 ? val : "0" + val;}
+    setInterval( function(){
+        document.getElementById("seconds").innerHTML=time(++sec);
+    }, 1000);
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
