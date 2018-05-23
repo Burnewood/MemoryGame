@@ -13,7 +13,6 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
     oneDie = 30,
     sec = 0;
 
-
 function makeCard(card){
   return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`;
 }
@@ -26,14 +25,15 @@ function initGame(){
   sec = 0;
   matches = 0;
   moves = 0;
+  cardsReveal = [];
+  cardDeck = document.querySelectorAll('.card');
 }
-
 initGame();
-//var reset = document.querySelector('.restart');
+
+var reset = document.querySelector('.restart');
 var cardsReveal = [];
 var cardDeck = document.querySelectorAll('.card');
-
-
+var moveCounter = document.querySelector('.moves');
 // main deck functions below
 cardDeck.forEach(function(card){
     if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
@@ -48,8 +48,7 @@ cardDeck.forEach(function(card){
             cardsReveal[1].classList.remove('open','show');
             cardsReveal[1].classList.add('match');
             cardsReveal = [];
-            matches = matches +1;
-            moves = moves + 1;
+            matches +=1;
           }else{
           //if no match
           setTimeout(function(){
@@ -57,14 +56,31 @@ cardDeck.forEach(function(card){
               card.classList.remove('open','show');
             });
             cardsReveal = [];
-            moves = moves + 1;
           },1000);
         }
+        moves +=1;
+        moveCounter.innerText = moves;
       }
     });
   }
 });
 
+//reset button function
+// reset.addEventListener('click',function(){
+//   swal({
+//     title: 'Are you sure?',
+//     text: "Your progress will be lost!",
+//     type: 'warning',
+//     showCancelButton: true,
+//     confirmButtonText:'<i class="fa fa-thumbs-up"></i> Yup!',
+//     cancelButtonText:'<i class="fa fa-thumbs-down"></i> NO!',
+//     reverseButtons: true
+//   }).then(function(confirmed){
+//     if(confirmed){
+//       initGame();
+//     }
+//   })
+// });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
