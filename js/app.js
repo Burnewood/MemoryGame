@@ -23,20 +23,33 @@ function initGame(){
     return makeCard(card);
   });
   document.querySelector('.deck').innerHTML = deckHTML.join('');
+  sec = 0;
+  matches = 0;
+  moves = 0;
 }
 
 initGame();
-
+//var reset = document.querySelector('.restart');
 var cardsReveal = [];
 var cardDeck = document.querySelectorAll('.card');
 
 cardDeck.forEach(function(card){
   card.addEventListener('click',function(x){
-    cardsReveal.push(card);
-    console.log('revealed:',cardsReveal.length);
-    card.classList.add('open','show');
+    if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
+      cardsReveal.push(card);
+      card.classList.add('open','show');
+        if(cardsReveal.length > 1){
+          setTimeout(function(){
+            cardsReveal.forEach(function(card){
+              card.classList.remove('open','show');
+            });
+            cardsReveal = [];
+          },1000);
+        }
+      }
+    });
   });
-});
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
