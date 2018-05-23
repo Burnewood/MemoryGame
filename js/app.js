@@ -10,7 +10,6 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
     fourDie = 15,
     threeDie = 20,
     twoDie = 25,
-    oneDie = 30,
     sec = 0;
 
 function makeCard(card){
@@ -34,6 +33,7 @@ var reset = document.querySelector('.restart');
 var cardsReveal = [];
 var cardDeck = document.querySelectorAll('.card');
 var moveCounter = document.querySelector('.moves');
+
 // main deck functions below
 cardDeck.forEach(function(card){
     if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
@@ -60,10 +60,32 @@ cardDeck.forEach(function(card){
         }
         moves +=1;
         moveCounter.innerText = moves;
+        setRating(moves);
       }
     });
   }
 });
+//rating function (dice counter)
+function setRating(moves){
+  if(moves<=sixDie){}
+  else if(moves >sixDie && moves<=fiveDie){
+    document.getElementById('rating').classList.remove('fa-dice-six');
+    document.getElementById('rating').classList.add('fa-dice-five');
+  }else if(moves >fiveDie && moves<=fourDie){
+    document.getElementById('rating').classList.remove('fa-dice-five');
+    document.getElementById('rating').classList.add('fa-dice-four');
+  }else if(moves >fourDie && moves<=threeDie){
+    document.getElementById('rating').classList.remove('fa-dice-four');
+    document.getElementById('rating').classList.add('fa-dice-three');
+  }else if(moves >threeDie && moves<=twoDie){
+    document.getElementById('rating').classList.remove('fa-dice-three');
+    document.getElementById('rating').classList.add('fa-dice-two');
+  }else if(moves >twoDie){
+    document.getElementById('rating').classList.remove('fa-dice-two');
+    document.getElementById('rating').classList.add('fa-dice-one');
+  }
+}
+
 
 //reset button function
 // reset.addEventListener('click',function(){
