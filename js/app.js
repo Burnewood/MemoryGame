@@ -1,7 +1,7 @@
 /*
  * Set variables for functions & create array to hold card symbols
  */
-let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar','robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar'],
+let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','burn','robot','lemon','birthday-cake','heart','skull','street-view','flask','burn'],
     cardTotal = cardSymbols.length / 2,
     matches = 0,
     moves = 0,
@@ -11,12 +11,11 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
     threeDie = 20,
     twoDie = 25,
     oneDie = 30,
-    sec = 0,
-    cardsReveal = [];
-    cardDeck = document.querySelectorAll('.card');
+    sec = 0;
+
 
 function makeCard(card){
-    return `<li class="card" card-data="${card}"><i class="fa fa-${card}"></i></li>`;
+  return `<li class="card" card-data="${card}"><i class="fa fa-${card}"></i></li>`;
 }
 
 function initGame(){
@@ -27,6 +26,17 @@ function initGame(){
 }
 
 initGame();
+
+var cardsReveal = [];
+var cardDeck = document.querySelectorAll('.card');
+
+cardDeck.forEach(function(card){
+  card.addEventListener('click',function(x){
+    cardsReveal.push(card);
+    console.log('revealed:',cardsReveal.length);
+    card.classList.add('open','show');
+  });
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
