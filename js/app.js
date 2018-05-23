@@ -15,7 +15,7 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
 
 
 function makeCard(card){
-  return `<li class="card" card-data="${card}"><i class="fa fa-${card}"></i></li>`;
+  return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`;
 }
 
 function initGame(){
@@ -33,22 +33,37 @@ initGame();
 var cardsReveal = [];
 var cardDeck = document.querySelectorAll('.card');
 
+
+// main deck functions below
 cardDeck.forEach(function(card){
-  card.addEventListener('click',function(x){
     if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
+      card.addEventListener('click',function(x){
       cardsReveal.push(card);
       card.classList.add('open','show');
         if(cardsReveal.length > 1){
+          //if match
+          if(cardsReveal[0].dataset.card == cardsReveal[1].dataset.card){
+            cardsReveal[0].classList.remove('open','show');
+            cardsReveal[0].classList.add('match');
+            cardsReveal[1].classList.remove('open','show');
+            cardsReveal[1].classList.add('match');
+            cardsReveal = [];
+            matches = matches +1;
+            moves = moves + 1;
+          }else{
+          //if no match
           setTimeout(function(){
             cardsReveal.forEach(function(card){
               card.classList.remove('open','show');
             });
             cardsReveal = [];
+            moves = moves + 1;
           },1000);
         }
       }
     });
-  });
+  }
+});
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976

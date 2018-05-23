@@ -96,7 +96,6 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
     background: #3e4c57;
     cursor: default;
     border-width: 2px;
