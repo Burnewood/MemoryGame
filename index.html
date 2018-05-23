@@ -4,82 +4,60 @@
     <meta charset="utf-8">
     <title>Memory Game</title>
     <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/sweetalert2/3.0.3/sweetalert2.min.css'>
+	  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
     <link rel="stylesheet" href="css/app.css">
+    <link rel="icon" href="img/gameLogo.png">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Memory Game</h1>
-        </header>
-
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
-
-        	<span class="moves">3</span> Moves
-
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
-        </section>
-
-        <ul class="deck">
-            <li class="card">
-                <i class="fa fa-flask"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-birthday-cake"></i>
-            </li>
-            <li class="card match">
-                <i class="fa fa-child"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-hotjar"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-dice"></i>
-            </li>
-            <li class="card match">
-                <i class="fa fa-child"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-glasses"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-playstation"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-hotjar"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-chrome"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-birthday-cake"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-gamepad"></i>
-            </li>
-            <li class="card open show">
-                <i class="fa fa-birthday-cake"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-dice"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-chrome"></i>
-            </li>
-            <li class="card">
-                <i class="fa fa-playstation"></i>
-            </li>
-        </ul>
+  <header>
+    <div id="title">
+      <h1>Patrick Woodburne</h1>
+      <p>BIT - Quality Assurance - Programmer</p>
     </div>
+    <div id="logo">
+      <img id="portrait" src="img/Profile.png" alt="portrait">
+    </div>
+  </header>
 
-    <script src="js/app.js"></script>
+  <div id="hero">
+    <h2>Memory Game</h2>
+  </div>
+
+  <div class="container">
+      <section class="score-panel">
+      	<ul class="stars">
+        	<li><i class="fa fa-dice-six"></i></li>
+        </ul>
+        <span class="moves">0</span> Moves
+        <div class="timer">
+          <i class="fa fa-clock"></i>
+          <span id="seconds"></span>
+        </div>
+        <div class="restart">
+        		<i class="fa fa-retweet"></i>
+        </div>
+      </section>
+      <ul class="deck"></ul>
+  </div>
+
+  <footer>
+    <div class="container">
+      <section id="links">
+        <a href="https://www.instagram.com/patrickwoodburne/"><img class="link icon" src="img/instagramLogo.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/Shifter19"><img class="link icon" src="img/facebookLogo.png" alt="Facebook"></a>
+        <a href="https://twitter.com/pwoodburne"><img class="link icon" src="img/twitterLogo.png" alt="Twitter"></a>
+        <a href="https://www.linkedin.com/in/pwoodburne/"><img class="link icon" src="img/linkedinLogo.png" alt="Linked In"></a>
+        <a href="files/resume.pdf"><img class="link icon" src="img/resumeLogo.png" alt="Resume"></a>
+      </section>
+    </div>
+  </footer>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+	<script src='https://cdn.jsdelivr.net/sweetalert2/3.0.3/sweetalert2.min.js'></script>
+  <script src="js/app.js"></script>
+
 </body>
 </html>
