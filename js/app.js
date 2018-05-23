@@ -1,8 +1,8 @@
 /*
  * Set variables for functions & create array to hold card symbols
  */
-let symbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar','robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar'],
-    cardTotal = symbols.length / 2,
+let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar','robot','lemon','birthday-cake','heart','skull','street-view','flask','hotjar'],
+    cardTotal = cardSymbols.length / 2,
     matches = 0,
     moves = 0,
     sixDie = 8,
@@ -11,15 +11,22 @@ let symbols = ['robot','lemon','birthday-cake','heart','skull','street-view','fl
     threeDie = 20,
     twoDie = 25,
     oneDie = 30,
-    sec = 0;
+    sec = 0,
+    cardsReveal = [];
+    cardDeck = document.querySelectorAll('.card');
 
+function makeCard(card){
+    return `<li class="card" card-data="${card}"><i class="fa fa-${card}"></i></li>`;
+}
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+function initGame(){
+  let deckHTML = shuffle(cardSymbols).map(function(card){
+    return makeCard(card);
+  });
+  document.querySelector('.deck').innerHTML = deckHTML.join('');
+}
+
+initGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
