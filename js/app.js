@@ -67,22 +67,18 @@ cardDeck.forEach(function(card){
 });
 //rating function (dice counter)
 function setRating(moves){
-  if(moves<=sixDie){}
-  else if(moves >sixDie && moves<=fiveDie){
-    document.getElementById('rating').classList.remove('fa-dice-six');
-    document.getElementById('rating').classList.add('fa-dice-five');
+  if(moves<=sixDie){
+    document.getElementById('rating').classList.replace(document.getElementById('rating').className,'fa-dice-six');
+  }else if(moves >sixDie && moves<=fiveDie){
+    document.getElementById('rating').classList.replace('fa-dice-six','fa-dice-five');
   }else if(moves >fiveDie && moves<=fourDie){
-    document.getElementById('rating').classList.remove('fa-dice-five');
-    document.getElementById('rating').classList.add('fa-dice-four');
+    document.getElementById('rating').classList.replace('fa-dice-five','fa-dice-four');
   }else if(moves >fourDie && moves<=threeDie){
-    document.getElementById('rating').classList.remove('fa-dice-four');
-    document.getElementById('rating').classList.add('fa-dice-three');
+    document.getElementById('rating').classList.replace('fa-dice-four','fa-dice-three');
   }else if(moves >threeDie && moves<=twoDie){
-    document.getElementById('rating').classList.remove('fa-dice-three');
-    document.getElementById('rating').classList.add('fa-dice-two');
+    document.getElementById('rating').classList.replace('fa-dice-three','fa-dice-two');
   }else if(moves >twoDie){
-    document.getElementById('rating').classList.remove('fa-dice-two');
-    document.getElementById('rating').classList.add('fa-dice-one');
+    document.getElementById('rating').classList.replace('fa-dice-two','fa-dice-one');
   }
 }
 
@@ -99,6 +95,7 @@ function setRating(moves){
 //     reverseButtons: true
 //   }).then(function(confirmed){
 //     if(confirmed){
+//       setRating(moves);
 //       initGame();
 //     }
 //   })
