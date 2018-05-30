@@ -12,6 +12,11 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
     twoDie = 25,
     sec = 0;
 
+var reset = document.querySelector('.restart');
+var cardsReveal = [];
+var cardDeck = document.querySelectorAll('.card');
+var moveCounter = document.querySelector('.moves');
+
 function makeCard(card){
   return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`;
 }
@@ -26,16 +31,13 @@ function initGame(){
   moves = 0;
   cardsReveal = [];
   cardDeck = document.querySelectorAll('.card');
+  addEventListenerToCards();
 }
 initGame();
 
-var reset = document.querySelector('.restart');
-var cardsReveal = [];
-var cardDeck = document.querySelectorAll('.card');
-var moveCounter = document.querySelector('.moves');
-
 // main deck functions below
-cardDeck.forEach(function(card){
+function addEventListenerToCards(){
+  cardDeck.forEach(function(card){
     if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
       card.addEventListener('click',function(x){
       cardsReveal.push(card);
@@ -67,6 +69,8 @@ cardDeck.forEach(function(card){
     });
   }
 });
+}
+
 //rating function (dice counter)
 function setRating(moves){
   if(moves<=sixDie){
@@ -99,23 +103,23 @@ function setRating(moves){
 // }
 
 
-//reset button function
-// reset.addEventListener('click',function(){
-//   swal({
-//     title: 'Are you sure?',
-//     text: "Your progress will be lost!",
-//     type: 'warning',
-//     showCancelButton: true,
-//     confirmButtonText:'<i class="fa fa-thumbs-up"></i> Yup!',
-//     cancelButtonText:'<i class="fa fa-thumbs-down"></i> NO!',
-//     reverseButtons: true
-//   }).then(function(confirmed){
-//     if(confirmed){
-//       setRating(moves);
-//       initGame();
-//     }
-//   })
-// });
+// reset button function
+reset.addEventListener('click',function(){
+  swal({
+    title: 'Are you sure?',
+    text: "Your progress will be lost!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText:'<i class="fa fa-thumbs-up"></i> Yup!',
+    cancelButtonText:'<i class="fa fa-thumbs-down"></i> NO!',
+    reverseButtons: true
+  }).then(function(confirmed){
+    if(confirmed){
+      setRating(moves);
+      initGame();
+    }
+  })
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
