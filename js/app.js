@@ -2,7 +2,7 @@
  * Set variables for functions & create array to hold card symbols
  */
 let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view','flask','burn','robot','lemon','birthday-cake','heart','skull','street-view','flask','burn'],
-    cardTotal = cardSymbols.length / 2,
+    cardTotal = 8,
     matches = 0,
     moves = 0,
     sixDie = 8,
@@ -49,6 +49,8 @@ cardDeck.forEach(function(card){
             cardsReveal[1].classList.add('match');
             cardsReveal = [];
             matches +=1;
+            if(matches == cardTotal){
+            }
           }else{
           //if no match
           setTimeout(function(){
@@ -81,6 +83,20 @@ function setRating(moves){
     document.getElementById('rating').classList.replace('fa-dice-two','fa-dice-one');
   }
 }
+// function endGame(){
+//   stopTime();
+//   swal({
+//     title:'Great Job You Win!',
+//     text:'With'+moves+' moves and'++' rating in'+sec+' seconds',
+//     type:'success',
+//     confirmButtonText: 'Play again?'
+//    }).then(function(confirmed){
+//      if(confirmed){
+//        setRating(moves);
+//        initGame();
+//      }
+//    })
+// }
 
 
 //reset button function
@@ -115,11 +131,12 @@ function shuffle(array) {
 
     return array;
 }
-
+//timer functions below
 function time(val) { return val > 9 ? val : "0" + val;}
-    setInterval( function(){
-        document.getElementById("seconds").innerHTML=time(++sec);
-    }, 1000);
+setInterval( function(){
+    document.getElementById("seconds").innerHTML=time(++sec);
+}, 1000);
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
