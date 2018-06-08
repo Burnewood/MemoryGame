@@ -5,12 +5,18 @@ let cardSymbols = ['robot','lemon','birthday-cake','heart','skull','street-view'
     cardTotal = 8,
     matches = 0,
     moves = 0,
+    rating = 6,
     sixDie = 8,
     fiveDie = 10,
     fourDie = 15,
     threeDie = 20,
     twoDie = 25,
     sec = 0;
+
+var reset = document.querySelector('.restart');
+var cardsReveal = [];
+var cardDeck = document.querySelectorAll('.card');
+var moveCounter = document.querySelector('.moves');
 
 function makeCard(card){
   return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`;
@@ -21,101 +27,104 @@ function initGame(){
     return makeCard(card);
   });
   document.querySelector('.deck').innerHTML = deckHTML.join('');
+  document.getElementById('rating').classList.remove('fa-dice-six','fa-dice-five','fa-dice-four','fa-dice-three','fa-dice-two','fa-dice-one');
   sec = 0;
   matches = 0;
   moves = 0;
+  moveCounter.innerText = moves;
   cardsReveal = [];
   cardDeck = document.querySelectorAll('.card');
+  addEventListenerToCards();
 }
 initGame();
 
-var reset = document.querySelector('.restart');
-var cardsReveal = [];
-var cardDeck = document.querySelectorAll('.card');
-var moveCounter = document.querySelector('.moves');
 
 // main deck functions below
-cardDeck.forEach(function(card){
-    if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
-      card.addEventListener('click',function(x){
-      cardsReveal.push(card);
-      card.classList.add('open','show');
-        if(cardsReveal.length > 1){
-          //if match
-          if(cardsReveal[0].dataset.card == cardsReveal[1].dataset.card){
-            cardsReveal[0].classList.remove('open','show');
-            cardsReveal[0].classList.add('match');
-            cardsReveal[1].classList.remove('open','show');
-            cardsReveal[1].classList.add('match');
-            cardsReveal = [];
-            matches +=1;
-            if(matches == cardTotal){
-            }
-          }else{
-          //if no match
-          setTimeout(function(){
-            cardsReveal.forEach(function(card){
-              card.classList.remove('open','show');
-            });
-            cardsReveal = [];
-          },1000);
+function addEventListenerToCards(){
+  cardDeck.forEach(function(card){
+      if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
+        card.addEventListener('click',function(x){
+        cardsReveal.push(card);
+        card.classList.add('open','show');
+          if(cardsReveal.length > 1){
+            //if match
+            if(cardsReveal[0].dataset.card == cardsReveal[1].dataset.card){
+              cardsReveal[0].classList.remove('open','show');
+              cardsReveal[0].classList.add('match');
+              cardsReveal[1].classList.remove('open','show');
+              cardsReveal[1].classList.add('match');
+              cardsReveal = [];
+              matches +=1;
+              if(matches == cardTotal){
+                swal({
+                  title:'Great Job You Win!',
+                  text:'With '+(moves+1)+' moves and a '+rating+' star rating in '+sec+' seconds.',
+                  type:'success',
+                  confirmButtonText: 'Play again?'
+                 }).then(function(confirmed){
+                   if(confirmed){
+                     initGame();
+                   }
+                 });
+              }
+            }else{
+            //if no match
+            setTimeout(function(){
+              cardsReveal.forEach(function(card){
+                card.classList.remove('open','show');
+              });
+              cardsReveal = [];
+            },1000);
+          }
+          moves +=1;
+          moveCounter.innerText = moves;
+          setRating(moves);
         }
-        moves +=1;
-        moveCounter.innerText = moves;
-        setRating(moves);
-      }
-    });
-  }
-});
+      });
+    }
+  });
+}
 //rating function (dice counter)
 function setRating(moves){
   if(moves<=sixDie){
-    document.getElementById('rating').classList.replace(document.getElementById('rating').className,'fa-dice-six');
+    document.getElementById('rating').classList.add('fa-dice-six');
+    rating = 6;
   }else if(moves >sixDie && moves<=fiveDie){
     document.getElementById('rating').classList.replace('fa-dice-six','fa-dice-five');
+    rating = 5;
   }else if(moves >fiveDie && moves<=fourDie){
     document.getElementById('rating').classList.replace('fa-dice-five','fa-dice-four');
+    rating = 4;
   }else if(moves >fourDie && moves<=threeDie){
     document.getElementById('rating').classList.replace('fa-dice-four','fa-dice-three');
+    rating = 3;
   }else if(moves >threeDie && moves<=twoDie){
     document.getElementById('rating').classList.replace('fa-dice-three','fa-dice-two');
+    rating = 2;
   }else if(moves >twoDie){
     document.getElementById('rating').classList.replace('fa-dice-two','fa-dice-one');
+    rating = 1;
   }
 }
-// function endGame(){
-//   stopTime();
-//   swal({
-//     title:'Great Job You Win!',
-//     text:'With'+moves+' moves and'++' rating in'+sec+' seconds',
-//     type:'success',
-//     confirmButtonText: 'Play again?'
-//    }).then(function(confirmed){
-//      if(confirmed){
-//        setRating(moves);
-//        initGame();
-//      }
-//    })
-// }
-
 
 //reset button function
-// reset.addEventListener('click',function(){
-//   swal({
-//     title: 'Are you sure?',
-//     text: "Your progress will be lost!",
-//     type: 'warning',
-//     showCancelButton: true,
-//     confirmButtonText:'<i class="fa fa-thumbs-up"></i> Yup!',
-//     cancelButtonText:'<i class="fa fa-thumbs-down"></i> NO!',
-//     reverseButtons: true
-//   }).then(function(confirmed){
-//     if(confirmed){
-//       setRating(moves);
-//       initGame();
-//     }
-//   })
-// });
+ reset.addEventListener('click',function(){
+   swal({
+     title: 'Are you sure?',
+     text: "Your progress will be lost!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonText:'<i class="fa fa-thumbs-up"></i> Yup!',
+     cancelButtonText:'<i class="fa fa-thumbs-down"></i> NO!',
+     reverseButtons: true
+   }).then(function(confirmed){
+     if(confirmed){
+       moves =0;
+       moveCounter.innerText = moves;
+       initGame();
+     }
+   });
+ });
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
