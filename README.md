@@ -3,18 +3,21 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Dependencies](#Dependencies)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This is an Udacity project intended to demonstrate javascript, css and html skills.
 
-To get started, open `js/app.js` and start building out the app's functionality
+To play simply click cards to flip them over and reveal the card. Time and moves will be tracked as you play, ranking you based on your performance.
+[Play This Game!](https://burnewood.github.io/MemoryGame/).
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+To modify the shown icons, aside from basic images, see the deck array at the top of the javascript code and change the names to other Font Awesome applicable tags.
 
-## Contributing
+## Dependencies
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+The three below exterior libraries were used in the creation of this webpage.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+https://daneden.github.io/animate.css/
+https://sweetalert2.github.io/
+https://fontawesome.com/
