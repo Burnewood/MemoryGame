@@ -45,15 +45,17 @@ function addEventListenerToCards(){
       if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
         card.addEventListener('click',function(x){
         cardsReveal.push(card);
-        card.classList.add('open','show');
+        card.classList.add('open','show','animated','flipInY');
           if(cardsReveal.length > 1){
             //if match
             if(cardsReveal[0].dataset.card == cardsReveal[1].dataset.card){
-              cardsReveal[0].classList.remove('open','show');
-              cardsReveal[0].classList.add('match');
-              cardsReveal[1].classList.remove('open','show');
-              cardsReveal[1].classList.add('match');
-              cardsReveal = [];
+              setTimeout(function(){
+                cardsReveal.forEach(function(card){
+                  card.classList.add('match');
+                  card.classList.remove('open','show');
+                });
+                cardsReveal = [];
+              },1000);
               matches +=1;
               if(matches == cardTotal){
                 swal({
@@ -71,10 +73,11 @@ function addEventListenerToCards(){
             //if no match
             setTimeout(function(){
               cardsReveal.forEach(function(card){
+                card.classList.add('flip');
                 card.classList.remove('open','show');
               });
               cardsReveal = [];
-            },1000);
+            },1500);
           }
           moves +=1;
           moveCounter.innerText = moves;
