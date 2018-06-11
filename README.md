@@ -17,6 +17,7 @@ To modify the shown icons, aside from basic images, see the deck array at the to
 ## Dependencies
 
 The three below exterior libraries were used in the creation of this webpage.
+Also thanks to Biyun Wu for the solution to my eventListener issue.
 
 https://daneden.github.io/animate.css/
 https://sweetalert2.github.io/
