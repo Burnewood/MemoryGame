@@ -21,7 +21,7 @@ var moveCounter = document.querySelector('.moves');
 function makeCard(card){
   return `<li class="card" data-card="${card}"><i class="fa fa-${card}"></i></li>`;
 }
-
+//game startup function , resets all scoreboard fuctionality, shuffles cards and adds in click function to new deck
 function initGame(){
   let deckHTML = shuffle(cardSymbols).map(function(card){
     return makeCard(card);
@@ -39,12 +39,13 @@ function initGame(){
 initGame();
 
 
-// main deck functions below
+// main deck functions below (timers required for animations)
 function addEventListenerToCards(){
   cardDeck.forEach(function(card){
       if(!card.classList.contains('open') || !card.classList.contains('show') || !card.classList.contains('match')){
         card.addEventListener('click',function(x){
         cardsReveal.push(card);
+        //animate cards here when clicked
         card.classList.add('open','show','animated','flipInY');
           if(cardsReveal.length > 1){
             //if match
@@ -58,6 +59,7 @@ function addEventListenerToCards(){
               },1000);
               matches +=1;
               if(matches == cardTotal){
+                //if player meets win conditions, display dialogue box with information & reset game if they confirm
                 swal({
                   title:'Great Job You Win!',
                   text:'With '+(moves+1)+' moves and a '+rating+' star rating in '+sec+' seconds.',
@@ -73,6 +75,7 @@ function addEventListenerToCards(){
             //if no match
             setTimeout(function(){
               cardsReveal.forEach(function(card){
+                //re-animate cards when no match
                 card.classList.add('flip');
                 card.classList.remove('open','show');
               });
@@ -110,7 +113,7 @@ function setRating(moves){
   }
 }
 
-//reset button function
+//reset button function (prompts user with dialogue box)
  reset.addEventListener('click',function(){
    swal({
      title: 'Are you sure?',
