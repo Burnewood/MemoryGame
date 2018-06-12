@@ -27,7 +27,12 @@ function initGame(){
     return makeCard(card);
   });
   document.querySelector('.deck').innerHTML = deckHTML.join('');
-  document.getElementById('rating').classList.remove('fa-dice-six','fa-dice-five','fa-dice-four','fa-dice-three','fa-dice-two','fa-dice-one');
+  document.getElementById('starOne').classList.add('fa-star');
+  document.getElementById('starTwo').classList.add('fa-star');
+  document.getElementById('starThree').classList.add('fa-star');
+  document.getElementById('starFour').classList.add('fa-star');
+  document.getElementById('starFive').classList.add('fa-star');
+  document.getElementById('starSix').classList.add('fa-star');
   sec = 0;
   matches = 0;
   moves = 0;
@@ -59,6 +64,8 @@ function addEventListenerToCards(){
               },1000);
               matches +=1;
               if(matches == cardTotal){
+                moves +=1;
+                setRating(moves);
                 //if player meets win conditions, display dialogue box with information & reset game if they confirm
                 swal({
                   title:'Great Job You Win!',
@@ -93,22 +100,27 @@ function addEventListenerToCards(){
 //rating function (dice counter)
 function setRating(moves){
   if(moves<=sixDie){
-    document.getElementById('rating').classList.add('fa-dice-six');
+    document.getElementById('starOne').classList.add('fa-star');
+    document.getElementById('starTwo').classList.add('fa-star');
+    document.getElementById('starThree').classList.add('fa-star');
+    document.getElementById('starFour').classList.add('fa-star');
+    document.getElementById('starFive').classList.add('fa-star');
+    document.getElementById('starSix').classList.add('fa-star');
     rating = 6;
   }else if(moves >sixDie && moves<=fiveDie){
-    document.getElementById('rating').classList.replace('fa-dice-six','fa-dice-five');
+    document.getElementById('starSix').classList.remove('fa-star');
     rating = 5;
   }else if(moves >fiveDie && moves<=fourDie){
-    document.getElementById('rating').classList.replace('fa-dice-five','fa-dice-four');
+    document.getElementById('starFive').classList.remove('fa-star');
     rating = 4;
   }else if(moves >fourDie && moves<=threeDie){
-    document.getElementById('rating').classList.replace('fa-dice-four','fa-dice-three');
+    document.getElementById('starFour').classList.remove('fa-star');
     rating = 3;
   }else if(moves >threeDie && moves<=twoDie){
-    document.getElementById('rating').classList.replace('fa-dice-three','fa-dice-two');
+    document.getElementById('starThree').classList.remove('fa-star');
     rating = 2;
   }else if(moves >twoDie){
-    document.getElementById('rating').classList.replace('fa-dice-two','fa-dice-one');
+    document.getElementById('starTwo').classList.remove('fa-star');
     rating = 1;
   }
 }
